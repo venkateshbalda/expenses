@@ -12,4 +12,6 @@ import balda.venkatesh.expenses.models.AccountsPojo;
 public interface AccountsRepo extends JpaRepository<AccountsPojo, Integer>{
 	@Query("FROM AccountsPojo WHERE account_name=?1 ORDER BY account_name")
 	List<AccountsPojo> getByAccount_name(String username);
+	
+	List<AccountsPojo> findByUserPojo_Id(Integer userId);
 }

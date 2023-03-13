@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import balda.venkatesh.expenses.models.AccountsPojo;
@@ -29,7 +30,12 @@ public class AccountsService {
 		accountsRepo.deleteById(id);
 		return ("account deleted");
 	}
-	
+/*
+	public ResponseEntity<Void> deleteAccount(Integer id) {
+		accountsRepo.deleteById(id);
+		return ResponseEntity.ok().build();
+	}
+*/	
 	public AccountsPojo updateAccount(AccountsPojo accountsPojo) {
 		int aid = accountsPojo.getId();
 		AccountsPojo accounts = accountsRepo.getById(aid);

@@ -1,8 +1,10 @@
 package balda.venkatesh.expenses.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import balda.venkatesh.expenses.models.UserPojo;
 import balda.venkatesh.expenses.repositories.AccountsRepo;
 import balda.venkatesh.expenses.repositories.UserRepo;
 import balda.venkatesh.expenses.services.AccountsService;
+import balda.venkatesh.expenses.services.GetTotalAmountService;
 import balda.venkatesh.expenses.services.UserService;
 
 @CrossOrigin
@@ -33,6 +36,9 @@ public class AccountsController {
 	
 	@Autowired
 	UserRepo userRepo;
+	
+	@Autowired
+	GetTotalAmountService getTotalAmountService;
 	
 	@PostMapping("/addaccount")
 	public AccountsPojo createAccount(@RequestBody AccountsPojo accountsPojo) {
@@ -62,6 +68,11 @@ public class AccountsController {
 	@GetMapping("/getaccountbyname/{accountname}")
 	public List<AccountsPojo> getAccountByName(@PathVariable String accountname){
 		return accountsService.getAccountByName(accountname);
+	}
+	
+	@GetMapping("/gettotalamount/{uid}")
+	public BigDecimal getTotalAmount(@PathVariable("uid") Integer uid) {
+		return getTotalAmountService.getTotalAmount(uid);
 	}
 	
 }
